@@ -1,8 +1,8 @@
 {
-  "name": "rest-shop",
+  "name": "322-todo",
   "version": "1.0.0",
-  "description": "RESTful API Tutorial Project",
-  "main": "index.js",
+  "description": "322 Todo",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -17,6 +17,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.1",
     "morgan": "^1.9.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.3"
   }
 }
