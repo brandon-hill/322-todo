@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:300,400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap');
 
 :root {
 	--success-color: #2ecc71;
@@ -12,19 +13,48 @@
 body {
 	background-color: #e3f1f6;
 	font-family: 'Muli', sans-serif;
+	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	margin: 0;
+	color: #10361d;
+}
+
+#index-body {
+	background: url('https://images.unsplash.com/photo-1584205274018-10dead526f24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80');
+	background-position: center;
+	background-size: cover;
+}
+
+.greeting {
+	margin: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+
+#brand {
+	font-family: 'Lora', serif;
+	font-size: 4rem;
 	margin: 0;
 }
 
+#welcome {
+	font-size: 1.6rem;
+	font-weight: lighter;
+	display: block;
+}
+
 .container {
-	background: #fff;
+	background-color: #f7fdfa;
 	padding: 40px 40px;
 	width: 400px;
 	border-radius: 8px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+	margin: 30px;
 }
 
 form {
@@ -86,14 +116,20 @@ form button {
 	margin: 14px 0 8px;
 	font-size: 1.1rem;
 	font-family: inherit;
-	background: #08c2e2;
+	background: #05c053;
 	color: #fff;
 	border: none;
 	border-radius: 4px;
-	box-shadow: 0px 3px 6px #00ccff81;
+	box-shadow: 0px 3px 6px #00ff8081;
 }
 
 form button:hover {
 	transform: scale(0.99);
 	cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {
+	.greeting {
+		margin-bottom: 20px;
+	}
 }

@@ -34,7 +34,7 @@ function checkEmail(input) {
 
 // Check required fields
 function checkRequired(inputArr) {
-	inputArr.forEach(function(input) {
+	inputArr.forEach(function (input) {
 		if (input.value.trim() === '') {
 			showError(input, `${getFieldName(input)} is required`);
 		} else {
@@ -74,26 +74,27 @@ function getFieldName(input) {
 }
 
 // Submit event
-form.addEventListener('submit', e => {
-	e.preventDefault();
+form.addEventListener('submit', (e) => {});
+// form.addEventListener('submit', e => {
+// 	e.preventDefault();
 
-	try {
-		checkRequired([firstName, lastName, email, password, confirmation]);
-		console.log('checked required');
-		checkLength(firstName, 1, 25);
-		console.log('checked length of firstname');
-		checkLength(lastName, 1, 25);
-		console.log('checked length of lastname');
-		checkEmail(email);
-		console.log('checked email');
-		checkLength(password, 6, 25);
-		console.log('checked length of password');
-		checkPasswordsMatch(password, confirmation);
-		console.log('check passwords match');
-	} catch (error) {
-		console.log('caught');
-	}
-});
+// 	try {
+// 		checkRequired([firstName, lastName, email, password, confirmation]);
+// 		console.log('checked required');
+// 		checkLength(firstName, 1, 25);
+// 		console.log('checked length of firstname');
+// 		checkLength(lastName, 1, 25);
+// 		console.log('checked length of lastname');
+// 		checkEmail(email);
+// 		console.log('checked email');
+// 		checkLength(password, 6, 25);
+// 		console.log('checked length of password');
+// 		checkPasswordsMatch(password, confirmation);
+// 		console.log('check passwords match');
+// 	} catch (error) {
+// 		console.log('caught');
+// 	}
+// });
 
 // checkRequired([firstName, lastName, email, password, confirmation]);
 // checkLength(firstName, 1, 25);
