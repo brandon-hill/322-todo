@@ -4,10 +4,10 @@ exports.chores_get_all = (req, res, next) => {
 	Chore.find()
 		.select('_id name createDate description dueDate author assignee priority')
 		.exec()
-		.then(docs => {
+		.then((docs) => {
 			const response = {
 				count: docs.length,
-				chores: docs.map(doc => {
+				chores: docs.map((doc) => {
 					return {
 						_id: doc._id,
 						name: doc.name,
@@ -18,18 +18,18 @@ exports.chores_get_all = (req, res, next) => {
 						priority: doc.priority,
 						request: {
 							type: 'GET',
-							url: 'http://localhost:3000/chores/' + doc._id
-						}
+							url: 'http://localhost:3000/chores/' + doc._id,
+						},
 					};
-				})
+				}),
 			};
 
 			res.status(200).json(response);
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log(err);
 			res.status(200).json({
-				error: err
+				error: err,
 			});
 		});
 };
@@ -44,11 +44,11 @@ exports.chores_create_chore = (req, res, next) => {
 		author: req.body.author,
 		assignee: req.body.assignee,
 		priority: req.body.priority,
-		status: req.body.status
+		status: req.body.status,
 	});
 	chore
 		.save()
-		.then(result => {
+		.then((result) => {
 			console.log(result);
 			res.status(201).json({
 				message: 'Successfully created chore',
@@ -63,12 +63,12 @@ exports.chores_create_chore = (req, res, next) => {
 					priority: result.priority,
 					request: {
 						type: 'GET',
-						url: 'http://localhost:3000/chores/' + result._id
-					}
-				}
+						url: 'http://localhost:3000/chores/' + result._id,
+					},
+				},
 			});
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log(err);
 			res.status(500).json({ error: err });
 		});
@@ -79,21 +79,21 @@ exports.chores_get_one = (req, res, next) => {
 	Chore.findById(id)
 		.select('_id name createDate description dueDate author assignee priority')
 		.exec()
-		.then(doc => {
+		.then((doc) => {
 			console.log('From database', doc);
 			if (doc) {
 				res.status(200).json({
 					chore: doc,
 					request: {
 						type: 'GET',
-						url: 'http://localhost:3000/chores/' + doc._id
-					}
+						url: 'http://localhost:3000/chores/' + doc._id,
+					},
 				});
 			} else {
 				res.status(404).json({ message: 'No valid entry found' });
 			}
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log(err);
 			res.status(500).json({ error: err });
 		});
@@ -107,20 +107,20 @@ exports.chores_update_chore = (req, res, next) => {
 	}
 	Chore.update({ _id: id }, { $set: updateOps })
 		.exec()
-		.then(result => {
+		.then((result) => {
 			console.log(result);
 			res.status(200).json({
 				message: 'Chore updated',
 				request: {
 					type: 'GET',
-					url: 'http://localhost:3000/chores/' + id
-				}
+					url: 'http://localhost:3000/chores/' + id,
+				},
 			});
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log(err);
 			res.status(500).json({
-				error: err
+				error: err,
 			});
 		});
 };
@@ -129,7 +129,7 @@ exports.chores_delete_chore = (req, res, next) => {
 	const id = req.params.choreId;
 	Chore.remove({ _id: id })
 		.exec()
-		.then(result => {
+		.then((result) => {
 			res.status(200).json({
 				message: 'Successfully deleted chore',
 				deletedChore: {
@@ -143,15 +143,15 @@ exports.chores_delete_chore = (req, res, next) => {
 					priority: result.priority,
 					request: {
 						type: 'POST',
-						url: 'http://localhost:3000/chores/'
-					}
-				}
+						url: 'http://localhost:3000/chores/',
+					},
+				},
 			});
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log(err);
 			res.status(500).json({
-				error: err
+				error: err,
 			});
 		});
-}
+};

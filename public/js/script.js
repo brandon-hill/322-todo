@@ -12,14 +12,12 @@ function showError(input, message) {
 	formControl.className = 'form-control error';
 	const small = formControl.querySelector('small');
 	small.innerText = message;
-	throw new error();
 }
 
 // Show success outline
 function showSuccess(input) {
 	const formControl = input.parentElement;
 	formControl.className = 'form-control success';
-	return true;
 }
 
 // Check if email is valid
@@ -29,6 +27,7 @@ function checkEmail(input) {
 		showSuccess(input);
 	} else {
 		showError(input, 'Email is not valid');
+		return false;
 	}
 }
 
@@ -37,6 +36,7 @@ function checkRequired(inputArr) {
 	inputArr.forEach(function (input) {
 		if (input.value.trim() === '') {
 			showError(input, `${getFieldName(input)} is required`);
+			return false;
 		} else {
 			showSuccess(input);
 		}
@@ -45,17 +45,18 @@ function checkRequired(inputArr) {
 
 // Check input length
 function checkLength(input, min, max) {
-	console.log(input.value.length);
 	if (input.value.length < min) {
 		showError(
 			input,
 			`${getFieldName(input)} must be at least ${min} characters`
 		);
+		return false;
 	} else if (input.value.length > max) {
 		showError(
 			input,
 			`${getFieldName(input)} must be less than ${max} characters`
 		);
+		return false;
 	} else {
 		showSuccess(input);
 	}
@@ -65,6 +66,7 @@ function checkLength(input, min, max) {
 function checkPasswordsMatch(password, confirmation) {
 	if (password.value !== confirmation.value) {
 		showError(confirmation, 'Passwords do not match');
+		return false;
 	}
 }
 
@@ -73,38 +75,17 @@ function getFieldName(input) {
 	return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
-// Submit event
-form.addEventListener('submit', (e) => {});
-// form.addEventListener('submit', e => {
+// // Submit event
+// form.addEventListener('submit', (e) => {
 // 	e.preventDefault();
 
-// 	try {
-// 		checkRequired([firstName, lastName, email, password, confirmation]);
-// 		console.log('checked required');
-// 		checkLength(firstName, 1, 25);
-// 		console.log('checked length of firstname');
-// 		checkLength(lastName, 1, 25);
-// 		console.log('checked length of lastname');
-// 		checkEmail(email);
-// 		console.log('checked email');
-// 		checkLength(password, 6, 25);
-// 		console.log('checked length of password');
-// 		checkPasswordsMatch(password, confirmation);
-// 		console.log('check passwords match');
-// 	} catch (error) {
-// 		console.log('caught');
-// 	}
+// 	checkRequired([firstName, lastName, email, password, confirmation]);
+// 	checkLength(firstName, 1, 25);
+// 	checkLength(lastName, 1, 25);
+// 	checkEmail(email);
+// 	checkLength(password, 6, 25);
+// 	checkLength(confirmation, 6, 25);
+// 	checkPasswordsMatch(password, confirmation);
+
+// 	form.submit();
 // });
-
-// checkRequired([firstName, lastName, email, password, confirmation]);
-// checkLength(firstName, 1, 25);
-// checkLength(lastName, 1, 25);
-
-// checkLength(lastName, 1, 25) &&
-// checkEmail(email) &&
-// checkLength(password, 6, 25) &&
-// checkLength(confirmation, 6, 25) &&
-// checkPasswordsMatch(password, confirmation)
-
-// checkLength(password, 6, 25);
-// checkPasswordsMatch(password, confirmation);
