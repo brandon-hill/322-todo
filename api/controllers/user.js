@@ -9,8 +9,6 @@ exports.user_get_register = (req, res, next) => {
 };
 
 exports.user_post_register = (req, res, next) => {
-	console.log('POST');
-	// res.send(req.body);
 	console.log(req.body);
 	User.find({ email: req.body.email })
 		.exec()
@@ -28,8 +26,7 @@ exports.user_post_register = (req, res, next) => {
 					} else {
 						const user = new User({
 							_id: new mongoose.Types.ObjectId(),
-							firstName: req.body.firstName,
-							lastName: req.body.lastName,
+							username: req.body.username,
 							email: req.body.email,
 							password: hash,
 						});

@@ -1,6 +1,5 @@
 const form = document.getElementById('form');
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
+const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmation = document.getElementById('confirmation');
@@ -25,22 +24,27 @@ function checkEmail(input) {
 	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	if (re.test(input.value.trim())) {
 		showSuccess(input);
+		return true;
 	} else {
 		showError(input, 'Email is not valid');
-		return false;
 	}
 }
 
 // Check required fields
 function checkRequired(inputArr) {
-	inputArr.forEach(function (input) {
+	let passed = true;
+	inputArr.forEach((input) => {
 		if (input.value.trim() === '') {
 			showError(input, `${getFieldName(input)} is required`);
-			return false;
+			passed = false;
 		} else {
 			showSuccess(input);
 		}
 	});
+
+	if (passed == true) {
+		return true;
+	}
 }
 
 // Check input length
@@ -50,15 +54,14 @@ function checkLength(input, min, max) {
 			input,
 			`${getFieldName(input)} must be at least ${min} characters`
 		);
-		return false;
 	} else if (input.value.length > max) {
 		showError(
 			input,
 			`${getFieldName(input)} must be less than ${max} characters`
 		);
-		return false;
 	} else {
 		showSuccess(input);
+		return true;
 	}
 }
 
@@ -66,7 +69,8 @@ function checkLength(input, min, max) {
 function checkPasswordsMatch(password, confirmation) {
 	if (password.value !== confirmation.value) {
 		showError(confirmation, 'Passwords do not match');
-		return false;
+	} else {
+		return true;
 	}
 }
 
@@ -75,17 +79,17 @@ function getFieldName(input) {
 	return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
-// // Submit event
-// form.addEventListener('submit', (e) => {
-// 	e.preventDefault();
-
-// 	checkRequired([firstName, lastName, email, password, confirmation]);
-// 	checkLength(firstName, 1, 25);
-// 	checkLength(lastName, 1, 25);
-// 	checkEmail(email);
-// 	checkLength(password, 6, 25);
-// 	checkLength(confirmation, 6, 25);
-// 	checkPasswordsMatch(password, confirmation);
-
-// 	form.submit();
-// });
+// Submit event
+form.addEventListener('submit', (e) => {
+	// if (!checkRequired([username, email, password, confirmation])) {
+	if (
+		!checkRequired([username, email, password, confirmation]) ||
+		!checkLength(username, 1, 25) ||
+		!checkEmail(email) ||
+		!checkLength(password, 6, 25) ||
+		!checkLength(confirmation, 6, 25) ||
+		!checkPasswordsMatch(password, confirmation)
+	) {
+		e.preventDefault();
+	}
+});

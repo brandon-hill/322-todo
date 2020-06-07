@@ -6,63 +6,62 @@
 		<title></title>
 		<link rel="stylesheet" href="/css/style.css" />
 	</head>
-	<body>
-		<div class="container">
-			<form action="/user/register" method="POST" class="form" id="form">
-				<h2>Register</h2>
-				<div class="form-control">
-					<label for="firstName">First name</label>
-					<input
-						type="text"
-						name="firstName"
-						id="firstName"
-						placeholder="Enter first name"
-					/>
-					<small>Error Message</small>
-				</div>
-				<div class="form-control">
-					<label for="lastName">Last name</label>
-					<input
-						type="text"
-						name="lastName"
-						id="lastName"
-						placeholder="Enter last name"
-					/>
-					<small>Error Message</small>
-				</div>
-				<div class="form-control">
-					<label for="email">Email</label>
-					<input
-						type="text"
-						name="email"
-						id="email"
-						placeholder="Enter email"
-					/>
-					<small>Error Message</small>
-				</div>
-				<div class="form-control">
-					<label for="password">Password</label>
-					<input
-						type="password"
-						name="password"
-						id="password"
-						placeholder="Enter password"
-					/>
-					<small>Error Message</small>
-				</div>
-				<div class="form-control">
-					<label for="confirmation">Confirm Password</label>
-					<input
-						type="password"
-						id="confirmation"
-						placeholder="Enter password again"
-					/>
-					<small>Error Message</small>
-				</div>
-				<button type="submit">Submit</button>
-			</form>
+	<body id="register-body">
+		<div class="success-modal">
+			<h2>Registration complete</h2>
+			<button><a href="/user/login">Login</a></button>
+		</div>
+		<div class="overlay">
+			<div class="greeting">
+				<h1 id="brand">322 Todo</h1>
+			</div>
+			<div class="container">
+				<form action="/user/register" method="POST" class="form" id="form">
+					<h2>Register</h2>
+					<div class="form-control">
+						<label for="username">Username</label>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							placeholder="Enter username"
+						/>
+						<small>Error Message</small>
+					</div>
+					<div class="form-control">
+						<label for="email">Email</label>
+						<input
+							type="text"
+							name="email"
+							id="email"
+							placeholder="Enter email"
+						/>
+						<small>Error Message</small>
+					</div>
+					<div class="form-control">
+						<label for="password">Password</label>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							placeholder="Enter password"
+						/>
+						<small>Error Message</small>
+					</div>
+					<div class="form-control">
+						<label for="confirmation">Confirm Password</label>
+						<input
+							type="password"
+							id="confirmation"
+							placeholder="Enter password again"
+						/>
+						<small>Error Message</small>
+					</div>
+					<button type="submit">Register</button>
+				</form>
+			</div>
 		</div>
 
-		<!-- <script src="/js/script.js"></script> -->
+		<script src="/js/script.js"></script>
 	</body>
 </html>
