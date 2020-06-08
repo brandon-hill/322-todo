@@ -56,10 +56,15 @@ exports.user_post_register = (req, res, next) => {
 		});
 };
 
-exports.user_login = (req, res, next) => {
+exports.user_get_login = (req, res, next) => {
+	res.render('login');
+};
+
+exports.user_post_login = (req, res, next) => {
 	User.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
+			console.log(req.body.email);
 			if (user.length < 1) {
 				return res.status(401).json({
 					message: 'Authentication failed',
@@ -68,7 +73,7 @@ exports.user_login = (req, res, next) => {
 			bcrypt.compare(req.body.password, user[0].password, (err, result) => {
 				if (err) {
 					return res.status(401).json({
-						message: 'Authentication failed',
+						message: 'Authentication failed, incorrect password',
 					});
 				}
 				if (result) {
@@ -82,10 +87,7 @@ exports.user_login = (req, res, next) => {
 							expiresIn: '1h',
 						}
 					);
-					return res.status(200).json({
-						message: 'Authentication successful',
-						token: token,
-					});
+					res.redirect('/');
 				}
 			});
 		})

@@ -8,6 +8,6 @@ module.exports = (req, res, next) => {
 		req.userData = decoded;
 		next();
 	} catch (error) {
-		res.redirect(401, '/users/register');
+		res.redirect(401, '/user/login');
 	}
 };

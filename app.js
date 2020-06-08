@@ -43,13 +43,9 @@ app.use((req, res, next) => {
 });
 
 // Routes to handle requests
+app.use('/', choreRoutes);
 app.use('/chores', choreRoutes);
 app.use('/user', userRoutes);
-
-// TEMPORARY ROOT HANDLER
-app.get('/', (req, res, next) => {
-	res.render('index');
-});
 
 // Handle 404
 app.use((req, res, next) => {

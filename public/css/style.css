@@ -39,10 +39,33 @@ body {
 	height: 100%;
 }
 
-#register-body .overlay {
+.overlay {
 	display: flex;
 	width: 100%;
 	height: 100%;
+}
+
+.modal-overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	background: rgba(1, 14, 0, 0.555);
+}
+
+.success-modal {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 400px;
+	height: 280px;
+	border-radius: 8px;
+	background-color: #f7fdfa;
+	padding: 40px;
 }
 
 .greeting {
@@ -68,7 +91,7 @@ body {
 
 .container {
 	background-color: #f7fdfa;
-	padding: 40px 40px;
+	padding: 40px;
 	width: 400px;
 	border-radius: 8px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
@@ -128,7 +151,7 @@ form label {
 	font-weight: bold;
 }
 
-form button {
+button {
 	width: 100%;
 	padding: 12px;
 	margin: 14px 0 8px;
@@ -141,7 +164,12 @@ form button {
 	box-shadow: 0px 3px 6px #00ff8081;
 }
 
-form button:hover {
+button a {
+	text-decoration: none;
+	color: white;
+}
+
+button:hover {
 	transform: scale(0.99);
 	cursor: pointer;
 }

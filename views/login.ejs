@@ -12,16 +12,21 @@
 				<h1 id="brand">322 Todo</h1>
 			</div>
 			<div class="container">
-				<form action="/user/login" id="login-form">
+				<form action="/user/login" method="POST" id="login-form">
 					<h2>Login</h2>
 					<div class="form-control">
 						<label for="email">Email</label>
-						<input type="text" id="email" placeholder="Email" />
+						<input type="text" id="email" name="email" placeholder="Email" />
 						<small>Error Message</small>
 					</div>
 					<div class="form-control">
 						<label for="password">Password</label>
-						<input type="password" id="password" placeholder="Password" />
+						<input
+							type="password"
+							id="password"
+							name="password"
+							placeholder="Password"
+						/>
 						<small>Error Message</small>
 					</div>
 					<button type="submit">Login</button>
