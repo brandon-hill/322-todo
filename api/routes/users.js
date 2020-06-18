@@ -1,17 +1,16 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const UserController = require('../controllers/user');
-const checkAuth = require('../middleware/check-auth');
+const UserController = require('../controllers/user')
 
-router.get('/register', UserController.user_get_register);
+router.get('/register', UserController.user_get_register)
 
-router.post('/register', UserController.user_post_register);
+router.post('/register', UserController.user_post_register)
 
-router.get('/login', UserController.user_get_login);
+router.get('/login', UserController.user_get_login)
 
-router.post('/login', UserController.user_post_login);
+router.post('/login', UserController.user_post_login)
 
-router.delete('/:userId', checkAuth, UserController.user_delete);
+router.delete('/:userId', UserController.user_delete)
 
-module.exports = router;
+module.exports = router

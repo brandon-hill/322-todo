@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="/css/style.css" />
 	</head>
 	<body id="index-body">
+		<%- include ('./partials/messages') %>
 		<div class="overlay">
 			<div class="greeting">
 				<h1 id="brand">322 Todo</h1>
@@ -30,6 +31,7 @@
 						<small>Error Message</small>
 					</div>
 					<button type="submit">Login</button>
+					<p>Not registered? <a href="/user/register">Sign Up</a></p>
 				</form>
 			</div>
 		</div>

@@ -1,16 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const checkAuth = require('../middleware/check-auth');
-const choresController = require('../controllers/chores');
+const express = require('express')
+const router = express.Router()
 
-router.get('/', checkAuth, choresController.chores_get_all);
+const choresController = require('../controllers/chores')
 
-router.post('/', checkAuth, choresController.chores_create_chore);
+router.get('/', choresController.chores_get_all)
 
-router.get('/:choreId', checkAuth, choresController.chores_get_one);
+router.post('/', choresController.chores_create_chore)
 
-router.patch('/:choreId', checkAuth, choresController.chores_update_chore);
+router.get('/:choreId', choresController.chores_get_one)
 
-router.delete('/:choreId', checkAuth);
+router.patch('/:choreId', choresController.chores_update_chore)
 
-module.exports = router;
+router.delete('/:choreId')
+
+module.exports = router

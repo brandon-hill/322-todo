@@ -26,6 +26,11 @@ body {
 	color: #10361d;
 }
 
+a {
+	color: #02a747;
+	text-decoration: none;
+}
+
 #index-body {
 	background: url('https://images.unsplash.com/photo-1584205274018-10dead526f24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80');
 	background-color: #10361d;
@@ -56,16 +61,28 @@ body {
 	background: rgba(1, 14, 0, 0.555);
 }
 
-.success-modal {
+.error-flash {
 	position: absolute;
+	top: 5vh;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	width: 400px;
-	height: 280px;
+	width: 600px;
+	height: 100px;
+	border-radius: 8px;
+	background-color: #ffd7de;
+	padding: 30px;
+}
+
+.success-flash {
+	position: absolute;
+	top: 5vh;
+	display: flex;
+	align-items: center;
+	width: 600px;
+	height: 100px;
 	border-radius: 8px;
 	background-color: #f7fdfa;
-	padding: 40px;
+	padding: 30px;
 }
 
 .greeting {
@@ -157,7 +174,7 @@ button {
 	margin: 14px 0 8px;
 	font-size: 1.1rem;
 	font-family: inherit;
-	background: #05c053;
+	background: #02a747;
 	color: #fff;
 	border: none;
 	border-radius: 4px;

@@ -1,49 +1,49 @@
-const form = document.getElementById('form');
-const username = document.getElementById('username');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-const confirmation = document.getElementById('confirmation');
-const submit = document.querySelector('button');
+const form = document.getElementById('form')
+const username = document.getElementById('username')
+const email = document.getElementById('email')
+const password = document.getElementById('password')
+const confirmation = document.getElementById('confirmation')
+const submit = document.querySelector('button')
 
 // Show input error message and outline
 function showError(input, message) {
-	const formControl = input.parentElement;
-	formControl.className = 'form-control error';
-	const small = formControl.querySelector('small');
-	small.innerText = message;
+	const formControl = input.parentElement
+	formControl.className = 'form-control error'
+	const small = formControl.querySelector('small')
+	small.innerText = message
 }
 
 // Show success outline
 function showSuccess(input) {
-	const formControl = input.parentElement;
-	formControl.className = 'form-control success';
+	const formControl = input.parentElement
+	formControl.className = 'form-control success'
 }
 
 // Check if email is valid
 function checkEmail(input) {
-	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 	if (re.test(input.value.trim())) {
-		showSuccess(input);
-		return true;
+		showSuccess(input)
+		return true
 	} else {
-		showError(input, 'Email is not valid');
+		showError(input, 'Email is not valid')
 	}
 }
 
 // Check required fields
 function checkRequired(inputArr) {
-	let passed = true;
+	let passed = true
 	inputArr.forEach((input) => {
 		if (input.value.trim() === '') {
-			showError(input, `${getFieldName(input)} is required`);
-			passed = false;
+			showError(input, `${getFieldName(input)} is required`)
+			passed = false
 		} else {
-			showSuccess(input);
+			showSuccess(input)
 		}
-	});
+	})
 
 	if (passed == true) {
-		return true;
+		return true
 	}
 }
 
@@ -53,35 +53,35 @@ function checkLength(input, min, max) {
 		showError(
 			input,
 			`${getFieldName(input)} must be at least ${min} characters`
-		);
+		)
 	} else if (input.value.length > max) {
 		showError(
 			input,
 			`${getFieldName(input)} must be less than ${max} characters`
-		);
+		)
 	} else {
-		showSuccess(input);
-		return true;
+		showSuccess(input)
+		return true
 	}
 }
 
 // Check passwords match
 function checkPasswordsMatch(password, confirmation) {
 	if (password.value !== confirmation.value) {
-		showError(confirmation, 'Passwords do not match');
+		showError(confirmation, 'Passwords do not match')
 	} else {
-		return true;
+		return true
 	}
 }
 
 // Get fieldname
 function getFieldName(input) {
-	return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+	return input.id.charAt(0).toUpperCase() + input.id.slice(1)
 }
 
 // Submit event
 form.addEventListener('submit', (e) => {
-	// if (!checkRequired([username, email, password, confirmation])) {
+	// Validate fields
 	if (
 		!checkRequired([username, email, password, confirmation]) ||
 		!checkLength(username, 1, 25) ||
@@ -90,6 +90,6 @@ form.addEventListener('submit', (e) => {
 		!checkLength(confirmation, 6, 25) ||
 		!checkPasswordsMatch(password, confirmation)
 	) {
-		e.preventDefault();
+		e.preventDefault()
 	}
-});
+})
