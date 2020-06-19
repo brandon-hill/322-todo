@@ -70,6 +70,13 @@ exports.user_post_login = (req, res, next) => {
 	})(req, res, next)
 }
 
+// Logout handler
+exports.user_logout = (req, res) => {
+	req.logout()
+	req.flash('success_msg', 'Successfully Logged Out')
+	res.redirect('/login')
+}
+
 // Delete account
 exports.user_delete = (req, res, next) => {
 	User.remove({ _id: req.params.userId })

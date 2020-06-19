@@ -1,16 +1,25 @@
 const express = require('express')
 const router = express.Router()
+const { ensureAuthenticated } = require('../config/auth')
 
 const choresController = require('../controllers/chores')
 
-router.get('/', choresController.chores_get_all)
+router.get('/', ensureAuthenticated, choresController.chores_get_all)
 
-router.post('/', choresController.chores_create_chore)
+router.post('/', ensureAuthenticated, choresController.chores_create_chore)
 
-router.get('/:choreId', choresController.chores_get_one)
+router.get('/:choreId', ensureAuthenticated, choresController.chores_get_one)
 
-router.patch('/:choreId', choresController.chores_update_chore)
+router.patch(
+	'/:choreId',
+	ensureAuthenticated,
+	choresController.chores_update_chore
+)
 
-router.delete('/:choreId')
+router.delete(
+	'/:choreId',
+	ensureAuthenticated,
+	choresController.chores_delete_chore
+)
 
 module.exports = router

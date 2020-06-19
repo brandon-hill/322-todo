@@ -1,7 +1,7 @@
-<% if (error != '') { %>
-<div class="error-flash">
-	<h1>Authentication Error!</h1>
-	<p><% error %></p>
+<% if (success_msg != '') { %>
+<div class="success-flash">
+	<h1>Success!</h1>
+	<p><% success_msg %></p>
 	<span class="dismiss">Dismiss</span>
 </div>
 <% } %> <% if (error_msg != '') { %>
@@ -10,10 +10,10 @@
 	<p><% error_msg %></p>
 	<span class="dismiss">Dismiss</span>
 </div>
-<% } %> <% if (success_msg != '') { %>
-<div class="success-flash">
-	<h1>Success!</h1>
-	<p><% success_msg %></p>
+<% } %> <% if (error != '') { %>
+<div class="error-flash">
+	<h1>Authentication Error!</h1>
+	<p><% console.log(error) %></p>
 	<span class="dismiss">Dismiss</span>
 </div>
 <% } %>

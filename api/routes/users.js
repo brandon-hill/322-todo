@@ -13,4 +13,6 @@ router.post('/login', UserController.user_post_login)
 
 router.delete('/:userId', UserController.user_delete)
 
+router.get('/logout', UserController.user_logout)
+
 module.exports = router

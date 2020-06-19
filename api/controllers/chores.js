@@ -1,4 +1,4 @@
-const Chore = require('../models/chore');
+const Chore = require('../models/chore')
 
 exports.chores_get_all = (req, res, next) => {
 	Chore.find()
@@ -20,19 +20,19 @@ exports.chores_get_all = (req, res, next) => {
 							type: 'GET',
 							url: 'http://localhost:3000/chores/' + doc._id,
 						},
-					};
+					}
 				}),
-			};
+			}
 
-			res.status(200).json(response);
+			res.render('index')
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err)
 			res.status(200).json({
 				error: err,
-			});
-		});
-};
+			})
+		})
+}
 
 exports.chores_create_chore = (req, res, next) => {
 	const chore = new Chore({
@@ -45,11 +45,11 @@ exports.chores_create_chore = (req, res, next) => {
 		assignee: req.body.assignee,
 		priority: req.body.priority,
 		status: req.body.status,
-	});
+	})
 	chore
 		.save()
 		.then((result) => {
-			console.log(result);
+			console.log(result)
 			res.status(201).json({
 				message: 'Successfully created chore',
 				createdChore: {
@@ -66,21 +66,21 @@ exports.chores_create_chore = (req, res, next) => {
 						url: 'http://localhost:3000/chores/' + result._id,
 					},
 				},
-			});
+			})
 		})
 		.catch((err) => {
-			console.log(err);
-			res.status(500).json({ error: err });
-		});
-};
+			console.log(err)
+			res.status(500).json({ error: err })
+		})
+}
 
 exports.chores_get_one = (req, res, next) => {
-	const id = req.params.choreId;
+	const id = req.params.choreId
 	Chore.findById(id)
 		.select('_id name createDate description dueDate author assignee priority')
 		.exec()
 		.then((doc) => {
-			console.log('From database', doc);
+			console.log('From database', doc)
 			if (doc) {
 				res.status(200).json({
 					chore: doc,
@@ -88,45 +88,45 @@ exports.chores_get_one = (req, res, next) => {
 						type: 'GET',
 						url: 'http://localhost:3000/chores/' + doc._id,
 					},
-				});
+				})
 			} else {
-				res.status(404).json({ message: 'No valid entry found' });
+				res.status(404).json({ message: 'No valid entry found' })
 			}
 		})
 		.catch((err) => {
-			console.log(err);
-			res.status(500).json({ error: err });
-		});
-};
+			console.log(err)
+			res.status(500).json({ error: err })
+		})
+}
 
 exports.chores_update_chore = (req, res, next) => {
-	const id = req.params.choreId;
-	const updateOps = {};
+	const id = req.params.choreId
+	const updateOps = {}
 	for (const ops of req.body) {
-		updateOps[ops.propName] = ops.value;
+		updateOps[ops.propName] = ops.value
 	}
 	Chore.update({ _id: id }, { $set: updateOps })
 		.exec()
 		.then((result) => {
-			console.log(result);
+			console.log(result)
 			res.status(200).json({
 				message: 'Chore updated',
 				request: {
 					type: 'GET',
 					url: 'http://localhost:3000/chores/' + id,
 				},
-			});
+			})
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err)
 			res.status(500).json({
 				error: err,
-			});
-		});
-};
+			})
+		})
+}
 
 exports.chores_delete_chore = (req, res, next) => {
-	const id = req.params.choreId;
+	const id = req.params.choreId
 	Chore.remove({ _id: id })
 		.exec()
 		.then((result) => {
@@ -146,12 +146,12 @@ exports.chores_delete_chore = (req, res, next) => {
 						url: 'http://localhost:3000/chores/',
 					},
 				},
-			});
+			})
 		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err)
 			res.status(500).json({
 				error: err,
-			});
-		});
-};
+			})
+		})
+}
