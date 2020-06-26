@@ -4,14 +4,40 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>322 Todo</title>
+		<link rel="stylesheet" href="/css/style.css" />
 	</head>
-	<body>
+	<body id="index-body">
 		<nav>
-			<div class="brand">322 Todo</div>
-			<li class="nav-item">Home</li>
-			<li class="nav-item">Todo</li>
-			<li class="nav-item">Shopping</li>
+			<div class="nav-container">
+				<div class="brand">322 Todo</div>
+				<li class="nav-item">Home</li>
+				<li class="nav-item">Todo</li>
+				<li class="nav-item">Shopping</li>
+				<a href="/user/logout"><button id="logout-btn">Logout</button></a>
+			</div>
 		</nav>
-		<h1><%= user[0].username %>'s Dashboard</h1>
+		<% if (user.hasGroup == true) { %>
+		<div class="group-dashboard">
+			<h1>your group's dashboard</h1>
+		</div>
+		<% } else { %>
+		<h1>Set up your household</h1>
+		<div class="container">
+			<form id="group-join-form" action="/group/join" method="POST">
+				<div class="form-control">
+					<label for="group-code">Join a household</label>
+					<input
+						type="text"
+						id="group-code"
+						name="group-code"
+						placeholder="Enter access code"
+					/>
+				</div>
+			</form>
+			<div class="form-control">
+				<button id="create-group-btn">Create a group</button>
+			</div>
+		</div>
+		<% } %>
 	</body>
 </html>

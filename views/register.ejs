@@ -13,7 +13,12 @@
 				<h1 id="brand">322 Todo</h1>
 			</div>
 			<div class="container">
-				<form action="/user/register" method="POST" class="form" id="form">
+				<form
+					action="/user/register"
+					method="POST"
+					class="form"
+					id="register-form"
+				>
 					<h2>Register</h2>
 					<div class="form-control">
 						<label for="username">Username</label>
@@ -54,7 +59,8 @@
 						/>
 						<small>Error Message</small>
 					</div>
-					<button type="submit">Register</button>
+					<button type="submit" id="submit-btn">Register</button>
+					<p>Already registered? <a href="/user/login">Login</a></p>
 				</form>
 			</div>
 		</div>

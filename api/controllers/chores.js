@@ -1,4 +1,5 @@
 const Chore = require('../models/chore')
+const User = require('../models/user')
 
 exports.chores_get_all = (req, res, next) => {
 	Chore.find()
@@ -18,13 +19,13 @@ exports.chores_get_all = (req, res, next) => {
 						priority: doc.priority,
 						request: {
 							type: 'GET',
-							url: 'http://localhost:3000/chores/' + doc._id,
+							url: 'http://localhost:3000/' + doc._id,
 						},
 					}
 				}),
 			}
 
-			res.render('index')
+			res.render('index', { response: response, user: req.user })
 		})
 		.catch((err) => {
 			console.log(err)

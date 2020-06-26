@@ -1,19 +1,16 @@
 <% if (success_msg != '') { %>
-<div class="success-flash">
-	<h1>Success!</h1>
-	<p><% success_msg %></p>
+<div class="flash success-flash visible">
+	<p><%= success_msg %></p>
 	<span class="dismiss">Dismiss</span>
 </div>
 <% } %> <% if (error_msg != '') { %>
-<div class="error-flash">
-	<h1>Error!</h1>
-	<p><% error_msg %></p>
+<div class="flash error-flash visible">
+	<p><%= error_msg %></p>
 	<span class="dismiss">Dismiss</span>
 </div>
 <% } %> <% if (error != '') { %>
-<div class="error-flash">
-	<h1>Authentication Error!</h1>
-	<p><% console.log(error) %></p>
+<div class="flash error-flash visible">
+	<p><%= error %></p>
 	<span class="dismiss">Dismiss</span>
 </div>
 <% } %>

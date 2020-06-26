@@ -1,9 +1,11 @@
-const form = document.getElementById('form')
+const registerForm = document.getElementById('register-form')
 const username = document.getElementById('username')
 const email = document.getElementById('email')
 const password = document.getElementById('password')
 const confirmation = document.getElementById('confirmation')
-const submit = document.querySelector('button')
+const registerSubmit = document.querySelector('#register-form .submit-btn')
+const flashMessage = document.querySelector('.flash')
+const dismiss = document.querySelector('.dismiss')
 
 // Show input error message and outline
 function showError(input, message) {
@@ -79,17 +81,28 @@ function getFieldName(input) {
 	return input.id.charAt(0).toUpperCase() + input.id.slice(1)
 }
 
+// Dismiss flash message
+if (flashMessage != null) {
+	dismiss.addEventListener('click', () => {
+		console.log('toggled')
+		flashMessage.classList.add('dismissed')
+		flashMessage.classList.remove('visible')
+	})
+}
+
 // Submit event
-form.addEventListener('submit', (e) => {
-	// Validate fields
-	if (
-		!checkRequired([username, email, password, confirmation]) ||
-		!checkLength(username, 1, 25) ||
-		!checkEmail(email) ||
-		!checkLength(password, 6, 25) ||
-		!checkLength(confirmation, 6, 25) ||
-		!checkPasswordsMatch(password, confirmation)
-	) {
-		e.preventDefault()
-	}
-})
+if (registerForm) {
+	registerForm.addEventListener('submit', (e) => {
+		// Validate fields
+		if (
+			!checkRequired([username, email, password, confirmation]) ||
+			!checkLength(username, 1, 25) ||
+			!checkEmail(email) ||
+			!checkLength(password, 6, 25) ||
+			!checkLength(confirmation, 6, 25) ||
+			!checkPasswordsMatch(password, confirmation)
+		) {
+			e.preventDefault()
+		}
+	})
+}

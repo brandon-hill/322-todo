@@ -1,9 +1,11 @@
 module.exports = {
 	ensureAuthenticated: (req, res, next) => {
-		if (req.isAuthenticated) {
+		if (req.isAuthenticated()) {
+			console.log('authentication successful')
 			return next()
 		}
-		req.flash('err_msg', 'Please log in to view this resource')
-		res.redirect('/users/login')
+		console.log('authentication failed')
+		req.flash('error_msg', 'Please log in to view this resource')
+		res.redirect('/user/login')
 	},
 }
