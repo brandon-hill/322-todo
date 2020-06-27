@@ -34,9 +34,14 @@ nav {
 	top: 0;
 	color: white;
 	background-color: #10361d;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .nav-container {
+	width: 100%;
+	max-width: 1000px;
 	height: 10vh;
 	display: flex;
 	padding: 20px;
@@ -53,10 +58,10 @@ h1 {
 }
 
 .brand {
+	margin-right: auto;
 	font-size: 2rem;
 	font-family: 'Lora', serif;
 	font-weight: bold;
-	margin: 20px;
 }
 
 .nav-item {
@@ -97,8 +102,9 @@ a {
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+	max-width: 600px;
 	border-radius: 8px;
-	padding: 0 20px;
+	padding: 0 20px 0 30px;
 }
 
 .error-flash {
@@ -116,6 +122,8 @@ a {
 
 .dismiss {
 	cursor: pointer;
+	color: rgba(0, 0, 0, 0.5);
+	font-size: 1.6rem;
 }
 
 .dismissed {
@@ -125,7 +133,7 @@ a {
 #brand {
 	font-family: 'Lora', serif;
 	font-size: 5rem;
-	margin: 30px;
+	margin: 20px;
 	color: white;
 }
 
@@ -141,6 +149,25 @@ a {
 	width: 400px;
 	border-radius: 8px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#household-setup-container {
+	padding: 0;
+	width: 400px;
+}
+
+#household-setup-container > .form-control {
+	background: white;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top-left-radius: 8%;
+	border-top-right-radius: 8%;
+}
+
+#create-household-btn {
+	max-width: 260px;
 }
 
 form {
@@ -176,6 +203,29 @@ form label {
 	width: 100%;
 }
 
+#join-form-control {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#household-code {
+	height: 42px;
+	display: inline;
+	padding: 12px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: none;
+}
+
+#join-btn {
+	height: 42px;
+	margin: 0;
+	width: 100px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
 .form-control.success input {
 	border-color: var(--success-color);
 }
@@ -196,9 +246,19 @@ form label {
 	font-weight: bold;
 }
 
-#group-join-form {
-	background: white;
+#household-join-form {
+	background: #d6f3e5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
+	padding: 30px;
+	border-bottom-left-radius: 8%;
+	border-bottom-right-radius: 8%;
+}
+
+#household-join-form .form-control {
+	width: 260px;
 }
 
 button {
@@ -232,7 +292,8 @@ button:hover {
 	#brand {
 		font-size: 4rem;
 	}
-	.greeting {
-		margin-bottom: 20px;
+
+	body {
+		overflow: auto;
 	}
 }
