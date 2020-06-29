@@ -11,6 +11,7 @@ const session = require('express-session')
 
 const choreRoutes = require('./api/routes/chores')
 const userRoutes = require('./api/routes/users')
+const householdRoutes = require('./api/routes/households')
 
 // Passport Config
 require('./api/config/passport')(passport)
@@ -79,6 +80,7 @@ app.use((req, res, next) => {
 app.use('/', choreRoutes)
 app.use('/chores', choreRoutes)
 app.use('/user', userRoutes)
+app.use('/household', householdRoutes)
 
 // Handle 404
 app.use((req, res, next) => {
