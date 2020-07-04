@@ -30,12 +30,13 @@ exports.user_post_register = (req, res, next) => {
 							username: req.body.username,
 							email: req.body.email,
 							password: hash,
+							household: '',
 						})
 						user
 							.save()
 							.then((result) => {
 								console.log(result)
-								req.flash('success_msg', 'Registration Successful')
+								req.flash('success_msg', 'Registration successful')
 								res.redirect('/user/login')
 							})
 							.catch((err) => {

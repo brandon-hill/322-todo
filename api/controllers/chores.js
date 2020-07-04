@@ -1,31 +1,47 @@
 const Chore = require('../models/chore')
 const User = require('../models/user')
+const Household = require('../models/household')
 
 exports.chores_get_all = (req, res, next) => {
 	Chore.find()
 		.select('_id name createDate description dueDate author assignee priority')
 		.exec()
-		.then((docs) => {
+		.then((chores) => {
 			const response = {
-				count: docs.length,
-				chores: docs.map((doc) => {
+				count: chores.length,
+				chores: chores.map((chore) => {
 					return {
-						_id: doc._id,
-						name: doc.name,
-						createDate: doc.createDate,
-						description: doc.description,
-						dueDate: doc.dueDate,
-						author: doc.author,
-						priority: doc.priority,
+						_id: chore._id,
+						name: chore.name,
+						createDate: chore.createDate,
+						description: chore.description,
+						dueDate: chore.dueDate,
+						author: chore.author,
+						priority: chore.priority,
 						request: {
 							type: 'GET',
-							url: 'http://localhost:3000/' + doc._id,
+							url: 'http://localhost:3000/' + chore._id,
 						},
 					}
 				}),
 			}
 
-			res.render('index', { response: response, user: req.user })
+			Household.findOne({ _id: req.user.household })
+				.exec()
+				.then((household) => {
+					console.log('Household:' + household)
+
+					res.render('index', {
+						response: response,
+						user: req.user,
+						household: household,
+					})
+				})
+				.catch((err) => {
+					console.log(err)
+					req.flash('error_msg', 'Unable to find household')
+					res.redirect('/')
+				})
 		})
 		.catch((err) => {
 			console.log(err)

@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="/css/style.css" />
 	</head>
 	<body id="index-body">
+		<%- include ('./partials/messages') %>
 		<nav>
 			<div class="nav-container">
 				<div class="brand">322 Todo</div>
@@ -16,21 +17,38 @@
 				<a href="/user/logout"><button id="logout-btn">Logout</button></a>
 			</div>
 		</nav>
-		<% if (user.hasGroup == true) { %>
+		<% if (user.group != '') { %>
 		<div class="group-dashboard">
-			<h1>your group's dashboard</h1>
+			<h1><%= household.name %>'s dashboard</h1>
+			<div class="container" id="chores-container">
+				<h2><%= user.username %>'s chores</h2>
+			</div>
+			<div class="container" id="shopping-container">
+				<h2><%= household.name %>'s Shopping List</h2>
+			</div>
+			<div class="container" id="reminders-container">
+				<h2>Reminders</h2>
+			</div>
 		</div>
 		<% } else { %>
 		<h1>Set up your household</h1>
 		<div class="container" id="household-setup-container">
 			<div class="form-control">
-				<a href="/household/create">
+				<form
+					action="/household/create"
+					id="household-create-form"
+					method="POST"
+				>
+					<div class="form-control" id="create-form-control">
+						<label for="name">Name</label>
+						<input type="text" placeholder="Enter household name" name="name" />
+					</div>
 					<button id="create-household-btn">Create household</button>
-				</a>
+				</form>
 			</div>
 			<form id="household-join-form" action="/household/join" method="POST">
 				<label for="household-code">Or join an existing household</label>
-				<div class="form-control" id="join-form-control">
+				<div class="form-control" id="join-form-control" name="household-code">
 					<input
 						type="text"
 						id="household-code"
@@ -42,5 +60,6 @@
 			</form>
 		</div>
 		<% } %>
+		<script src="/js/script.js"></script>
 	</body>
 </html>

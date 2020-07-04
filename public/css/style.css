@@ -118,11 +118,11 @@ a {
 }
 
 .success-flash {
-	background-color: #f7fdfa;
+	background-color: #d6f3e5;
 }
 
 .visible {
-	transform: translateY(100%);
+	transform: translateY(180%);
 	transition: transform 1s;
 }
 
