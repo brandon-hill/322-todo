@@ -6,7 +6,7 @@
 		<title>322 Todo</title>
 		<link rel="stylesheet" href="/css/style.css" />
 	</head>
-	<body id="index-body">
+	<body id="household-body">
 		<%- include ('./partials/messages') %>
 		<nav>
 			<div class="nav-container">
@@ -17,17 +17,63 @@
 				<a href="/user/logout"><button id="logout-btn">Logout</button></a>
 			</div>
 		</nav>
-		<% if (user.group != '') { %>
-		<div class="group-dashboard">
-			<h1><%= household.name %>'s dashboard</h1>
+		<% if (user.household != '') { %>
+		<h1 id="dashboard-header"><%= household.name %>'s dashboard</h1>
+		<div id="household-dashboard">
 			<div class="container" id="chores-container">
 				<h2><%= user.username %>'s chores</h2>
-			</div>
-			<div class="container" id="shopping-container">
-				<h2><%= household.name %>'s Shopping List</h2>
+				<button class="add">+</button>
+				<form action="/chores/create" class="new-chore-form">
+					<div class="form-control">
+						<label for="chore-title">Title</label>
+						<input
+							type="text"
+							name="chore-title"
+							id="chore-title"
+							placeholder="Enter chore title"
+						/>
+					</div>
+					<div class="form-control">
+						<label for="chore-description">Description</label>
+						<input
+							type="text"
+							name="chore-description"
+							id="chore-description"
+							placeholder="Enter chore description"
+						/>
+					</div>
+					<div class="form-control">
+						<label for="due-date">Due Date</label>
+						<input type="date" name="due-date" id="chore-due-date" />
+					</div>
+					<div class="form-control">
+						<label for="priority">Priority</label>
+						<select name="priority" id="priority-select" class="priority">
+							<option value="high">High</option>
+							<option value="medium">Medium</option>
+							<option value="low">Low</option>
+						</select>
+					</div>
+					<button id="create-chore">Create chore</button>
+				</form>
+				<% if (household.chores != '') { %> <% household.chores.forEach(chore =>
+				{ %>
+				<div class="chore-container">
+					<span class="chore-name"><%= chore.name %></span>
+					<p class="chore-description"><%= chore.description %></p>
+					<span class="due-date"><%= chore.dueDate %></span>
+				</div>
+				<% }) %> <% } else { %>
+				<div class="no-chore-container">
+					<p>There are no chores. Click "+" to create one</p>
+				</div>
+				<% } %>
 			</div>
 			<div class="container" id="reminders-container">
 				<h2>Reminders</h2>
+			</div>
+			<div class="container" id="shopping-container">
+				<h2><%= household.name %>'s Shopping List</h2>
 			</div>
 		</div>
 		<% } else { %>

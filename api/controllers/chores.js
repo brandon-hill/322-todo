@@ -3,52 +3,37 @@ const User = require('../models/user')
 const Household = require('../models/household')
 
 exports.chores_get_all = (req, res, next) => {
-	Chore.find()
-		.select('_id name createDate description dueDate author assignee priority')
-		.exec()
-		.then((chores) => {
-			const response = {
-				count: chores.length,
-				chores: chores.map((chore) => {
-					return {
-						_id: chore._id,
-						name: chore.name,
-						createDate: chore.createDate,
-						description: chore.description,
-						dueDate: chore.dueDate,
-						author: chore.author,
-						priority: chore.priority,
-						request: {
-							type: 'GET',
-							url: 'http://localhost:3000/' + chore._id,
-						},
-					}
-				}),
-			}
+	// Retrieve household info if user has one
+	if (req.user.household != '') {
+		Household.findOne({ _id: req.user.household })
+			.exec()
+			.then((household) => {
+				console.log('Household:' + household)
 
-			Household.findOne({ _id: req.user.household })
-				.exec()
-				.then((household) => {
-					console.log('Household:' + household)
-
-					res.render('index', {
-						response: response,
-						user: req.user,
-						household: household,
+				Chore.find({ household: household._id })
+					.exec()
+					.then((chores) => {
+						res.render('index', {
+							chores: chores,
+							user: req.user,
+							household: household,
+						})
 					})
-				})
-				.catch((err) => {
-					console.log(err)
-					req.flash('error_msg', 'Unable to find household')
-					res.redirect('/')
-				})
-		})
-		.catch((err) => {
-			console.log(err)
-			res.status(200).json({
-				error: err,
+					.catch((err) => {
+						console.log(err)
+						res.status(200).json({
+							error: err,
+						})
+					})
 			})
-		})
+			.catch((err) => {
+				console.log(err)
+				req.flash('error_msg', 'Unable to find household')
+				res.redirect('/')
+			})
+	} else {
+		res.render('index', { user: req.user })
+	}
 }
 
 exports.chores_create_chore = (req, res, next) => {

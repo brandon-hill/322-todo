@@ -9,15 +9,14 @@ exports.user_get_register = (req, res, next) => {
 	res.render('register')
 }
 
-// Register handler
+// Register handler - FIX FORM CLEARING
 exports.user_post_register = (req, res, next) => {
 	User.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
 			if (user.length >= 1) {
-				return res.status(409).json({
-					message: 'Email already registered',
-				})
+				req.flash('error_msg', 'Email already registered')
+				res.redirect('/user/register')
 			} else {
 				bcrypt.hash(req.body.password, 10, (err, hash) => {
 					if (err) {

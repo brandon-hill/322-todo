@@ -22,18 +22,21 @@ exports.households_post_create = (req, res, next) => {
 				.then((user) => {
 					console.log(user)
 
-					if (user.group != '') {
-						req.flash('error_msg', 'User already belongs to a different group')
+					if (user.household != '') {
+						req.flash(
+							'error_msg',
+							'You already belong to a different household'
+						)
 						res.redirect('/')
 					}
 
-					// Update user's group id
-					user.group = result._id
+					// Update user's household id
+					user.household = result._id
 					user
 						.save()
 						.then(() => {
 							req.flash('success_msg', 'Household created')
-							res.render('/', { household: household })
+							res.render('index', { household: household })
 						})
 						.catch((err) => {
 							console.log(err)

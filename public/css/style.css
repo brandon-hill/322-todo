@@ -10,13 +10,10 @@
 	box-sizing: border-box;
 }
 
-html {
-	overflow: hidden;
-}
-
 body {
 	background: url('https://images.unsplash.com/photo-1551970634-747846a548cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
 	background-size: cover;
+	background-attachment: fixed;
 	font-family: 'Muli', sans-serif;
 	height: 100vh;
 	display: flex;
@@ -24,7 +21,6 @@ body {
 	justify-content: center;
 	margin: 0;
 	color: #104623;
-	overflow: hidden;
 }
 
 nav {
@@ -57,6 +53,10 @@ h1 {
 	color: white;
 }
 
+h2 {
+	margin: 0;
+}
+
 .container h1 {
 	color: inherit;
 	font-size: 1.6rem;
@@ -82,15 +82,6 @@ h1 {
 a {
 	color: #02a747;
 	text-decoration: none;
-}
-
-#index-body {
-	background: url('https://images.unsplash.com/photo-1584205274018-10dead526f24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80');
-	background-color: #10361d;
-	background-position: center;
-	background-size: cover;
-	display: flex;
-	flex-direction: column;
 }
 
 .overlay {
@@ -155,6 +146,12 @@ a {
 	width: 400px;
 	border-radius: 8px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#household-body {
+	display: block;
+	background: url('https://images.unsplash.com/photo-1473081556163-2a17de81fc97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=2734&q=80');
+	background-size: cover;
 }
 
 #household-setup-container {
@@ -265,6 +262,48 @@ form label {
 
 #household-join-form .form-control {
 	width: 260px;
+}
+
+#household-dashboard {
+	margin: 0px auto 30px auto;
+	padding: 50px 10px;
+	width: 100%;
+	max-width: 900px;
+	background-color: #10361d8e;
+	border-radius: 20px;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: auto;
+	grid-template-areas:
+		'chores reminders'
+		'chores shopping';
+	justify-items: center;
+}
+
+#dashboard-header {
+	font-family: 'Lora', serif;
+	font-size: 2rem;
+	padding: 28px 34px 14px;
+	margin: 110px auto 0 120px;
+	width: 500px;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	background-color: #10361d;
+}
+
+#chores-container {
+	grid-area: chores;
+	margin: 15px;
+}
+
+#reminders-container {
+	grid-area: reminders;
+	margin: 15px;
+}
+
+#shopping-container {
+	grid-area: shopping;
+	margin: 15px;
 }
 
 button {
