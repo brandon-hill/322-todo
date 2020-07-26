@@ -6,7 +6,11 @@ const choresController = require('../controllers/chores')
 
 router.get('/', ensureAuthenticated, choresController.chores_get_all)
 
-router.post('/', ensureAuthenticated, choresController.chores_create_chore)
+router.post(
+	'/create',
+	ensureAuthenticated,
+	choresController.chores_create_chore
+)
 
 router.get('/:choreId', ensureAuthenticated, choresController.chores_get_one)
 

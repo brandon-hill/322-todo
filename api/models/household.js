@@ -7,7 +7,7 @@ const householdSchema = mongoose.Schema({
 	chores: [],
 	shoppingList: [],
 	reminders: [],
-	accessCode: { type: Number, required: true },
+	accessCode: { type: Number, unique: true, required: true },
 })
 
 module.exports = mongoose.model('Household', householdSchema)

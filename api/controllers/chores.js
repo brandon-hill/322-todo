@@ -1,6 +1,11 @@
+const mongoose = require('mongoose')
+
 const Chore = require('../models/chore')
 const User = require('../models/user')
 const Household = require('../models/household')
+
+// Instantiate current date
+const today = new Date()
 
 exports.chores_get_all = (req, res, next) => {
 	// Retrieve household info if user has one
@@ -10,21 +15,12 @@ exports.chores_get_all = (req, res, next) => {
 			.then((household) => {
 				console.log('Household:' + household)
 
-				Chore.find({ household: household._id })
-					.exec()
-					.then((chores) => {
-						res.render('index', {
-							chores: chores,
-							user: req.user,
-							household: household,
-						})
-					})
-					.catch((err) => {
-						console.log(err)
-						res.status(200).json({
-							error: err,
-						})
-					})
+				// Render template
+				res.render('index', {
+					user: req.user,
+					household: household,
+					today: today,
+				})
 			})
 			.catch((err) => {
 				console.log(err)
@@ -37,42 +33,57 @@ exports.chores_get_all = (req, res, next) => {
 }
 
 exports.chores_create_chore = (req, res, next) => {
+	// Create and save chore
 	const chore = new Chore({
 		_id: new mongoose.Types.ObjectId(),
-		name: req.body.name,
+		title: req.body.title,
 		createDate: new Date(),
 		description: req.body.description,
 		dueDate: req.body.dueDate,
-		author: req.body.author,
+		author: req.user.username,
+		household: req.user.household,
 		assignee: req.body.assignee,
 		priority: req.body.priority,
-		status: req.body.status,
+		status: 'incomplete',
 	})
 	chore
 		.save()
 		.then((result) => {
 			console.log(result)
-			res.status(201).json({
-				message: 'Successfully created chore',
-				createdChore: {
-					_id: result._id,
-					name: result.name,
-					createDate: result.createDate,
-					description: result.description,
-					dueDate: result.dueDate,
-					author: result.author,
-					assignee: result.assignee,
-					priority: result.priority,
-					request: {
-						type: 'GET',
-						url: 'http://localhost:3000/chores/' + result._id,
-					},
-				},
-			})
+
+			// Push chore to chore list and save, then redirect
+			Household.findOne({ _id: req.user.household })
+				.exec()
+				.then((household) => {
+					household.chores.push(result)
+
+					household
+						.save()
+						.then((result) => {
+							console.log(`Updated Chore List: ${result.chores}`)
+						})
+						.catch((err) => {
+							console.log(err)
+							req.flash('error_msg', 'Unable to add chore to household')
+							res.render('index', {
+								user: req.user,
+								household: result,
+								today: today,
+							})
+						})
+				})
+				.catch((err) => {
+					console.log(err)
+					req.flash('error_msg', 'Unable to add chore to household')
+					res.redirect('/')
+				})
+			req.flash('success_msg', 'Chore created')
+			res.redirect('/')
 		})
 		.catch((err) => {
 			console.log(err)
-			res.status(500).json({ error: err })
+			req.flash('error_msg', 'Unable to create chore')
+			res.redirect('/')
 		})
 }
 

@@ -5,75 +5,96 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>322 Todo</title>
 		<link rel="stylesheet" href="/css/style.css" />
+		<script
+			src="https://kit.fontawesome.com/3d133a60e4.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body id="household-body">
 		<%- include ('./partials/messages') %>
 		<nav>
 			<div class="nav-container">
 				<div class="brand">322 Todo</div>
-				<li class="nav-item">Home</li>
-				<li class="nav-item">Todo</li>
-				<li class="nav-item">Shopping</li>
+				<p class="nav-item"><i class="fas fa-user"></i><%= user.username %></p>
 				<a href="/user/logout"><button id="logout-btn">Logout</button></a>
 			</div>
 		</nav>
 		<% if (user.household != '') { %>
-		<h1 id="dashboard-header"><%= household.name %>'s dashboard</h1>
-		<div id="household-dashboard">
-			<div class="container" id="chores-container">
-				<h2><%= user.username %>'s chores</h2>
-				<button class="add">+</button>
-				<form action="/chores/create" class="new-chore-form">
-					<div class="form-control">
-						<label for="chore-title">Title</label>
-						<input
-							type="text"
-							name="chore-title"
-							id="chore-title"
-							placeholder="Enter chore title"
-						/>
+		<div id="dashboard-container">
+			<h1 id="dashboard-header"><%= household.name %>'s dashboard</h1>
+			<div id="household-dashboard">
+				<div class="container" id="chores-container">
+					<div class="container-header">
+						<h2>Chores</h2>
+						<i class="fas fa-plus add"></i>
 					</div>
-					<div class="form-control">
-						<label for="chore-description">Description</label>
-						<input
-							type="text"
-							name="chore-description"
-							id="chore-description"
-							placeholder="Enter chore description"
-						/>
+					<div class="chore-create-container">
+						<form action="/chores/create" method="POST" id="chore-create-form">
+							<div class="form-control">
+								<label for="chore-title">Title</label>
+								<input
+									type="text"
+									name="title"
+									id="chore-title"
+									placeholder="Enter chore title"
+								/>
+							</div>
+							<div class="form-control">
+								<label for="chore-description">Description</label>
+								<input
+									type="text"
+									name="description"
+									id="chore-description"
+									placeholder="Enter chore description"
+								/>
+							</div>
+							<div class="form-control">
+								<label for="due-date">Due Date</label>
+								<input type="date" name="dueDate" id="chore-due-date" />
+							</div>
+							<div class="form-control">
+								<label for="assignee">Assign to:</label>
+								<input type="text" name="assignee" id="chore-assignee" />
+							</div>
+							<button id="create-chore">Create chore</button>
+						</form>
 					</div>
-					<div class="form-control">
-						<label for="due-date">Due Date</label>
-						<input type="date" name="due-date" id="chore-due-date" />
+					<% if (household.chores != '') { %> 
+						<% household.chores.forEach((chore) => { %>
+					<div class="chore-container">
+						<span class="chore-title"><%= chore.title %></span>
+						<p class="chore-description"><%= chore.description %></p>
+							<% if (Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1) == -1) { %>
+								<span class="due-date">Due <%= Math.abs(Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1)) %> day ago</span>
+							<% } else if (Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1) < 0) { %>
+								<span class="due-date">Due <%= Math.abs(Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1)) %> days ago</span>  
+							<% } else if (Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1) == 0) { %>
+								<span class="due-date">Due today</span>
+							<% } else if (Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1) == 1) { %> 
+								<span class="due-date">Due tomorrow</span>
+							<% } else { %>
+								<span class="due-date">Due in <%= Math.round((chore.dueDate.getTime() - today.getTime()) / (60 * 60 * 24 * 1000) + 1) %> days</span>
+							<% } %>
+						</span>
 					</div>
-					<div class="form-control">
-						<label for="priority">Priority</label>
-						<select name="priority" id="priority-select" class="priority">
-							<option value="high">High</option>
-							<option value="medium">Medium</option>
-							<option value="low">Low</option>
-						</select>
+					<% }) %> <% } else { %>
+					<div class="no-chore-container">
+						<p>There are no chores. Click "+" to create one</p>
 					</div>
-					<button id="create-chore">Create chore</button>
-				</form>
-				<% if (household.chores != '') { %> <% household.chores.forEach(chore =>
-				{ %>
-				<div class="chore-container">
-					<span class="chore-name"><%= chore.name %></span>
-					<p class="chore-description"><%= chore.description %></p>
-					<span class="due-date"><%= chore.dueDate %></span>
+					<% } %>
 				</div>
-				<% }) %> <% } else { %>
-				<div class="no-chore-container">
-					<p>There are no chores. Click "+" to create one</p>
+				<div class="container" id="reminders-container">
+					<div class="container-header">
+						<h2>Reminders</h2>
+						<i class="fas fa-plus add"></i>
+					</div>
 				</div>
-				<% } %>
-			</div>
-			<div class="container" id="reminders-container">
-				<h2>Reminders</h2>
-			</div>
-			<div class="container" id="shopping-container">
-				<h2><%= household.name %>'s Shopping List</h2>
+				<div class="container" id="shopping-container">
+					<div class="container-header">
+						<h2>Shopping List</h2>
+						<i class="fas fa-plus add"></i>
+					</div>
+				</div>
 			</div>
 		</div>
 		<% } else { %>
@@ -97,8 +118,8 @@
 				<div class="form-control" id="join-form-control" name="household-code">
 					<input
 						type="text"
-						id="household-code"
-						name="household-code"
+						id="access-code"
+						name="accessCode"
 						placeholder="Enter access code"
 					/>
 					<button id="join-btn">Join</button>

@@ -7,10 +7,10 @@ const choreSchema = mongoose.Schema({
 	createDate: { type: Date, default: Date.now, required: true },
 	dueDate: { type: Date, required: true },
 	author: { type: String, required: true },
+	assignee: String,
 	household: mongoose.Schema.Types.ObjectId,
-	priority: { type: String, required: true },
 	status: { type: String, required: true },
-	completionDate: { type: Date, default: Date.now },
+	completionDate: { type: Date },
 })
 
 module.exports = mongoose.model('Chore', choreSchema)

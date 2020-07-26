@@ -6,6 +6,11 @@ const confirmation = document.getElementById('confirmation')
 const registerSubmit = document.querySelector('#register-form .submit-btn')
 const flashMessage = document.querySelector('.flash')
 const dismiss = document.querySelector('.dismiss')
+const dashboardContainer = document.querySelector('#dashboard-container')
+const containerHeaders = document.querySelectorAll('.container-header')
+// const addBtn = document.querySelectorAll('.add')
+// const createForm = document.querySelectorAll('.create-form')
+// const choreCreateForm = document.querySelector('#chore-create-form')
 
 // Show input error message and outline
 function showError(input, message) {
@@ -106,3 +111,13 @@ if (registerForm) {
 		}
 	})
 }
+
+// Toggle create form
+Array.from(containerHeaders).forEach((header) => {
+	header.addEventListener('click', (e) => {
+		if (e.target.classList.contains('add')) {
+			e.target.classList.toggle('expanded')
+			e.currentTarget.nextSibling.nextSibling.classList.toggle('expanded')
+		}
+	})
+})

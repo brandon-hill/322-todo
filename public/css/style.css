@@ -25,11 +25,10 @@ body {
 
 nav {
 	width: 100%;
-	height: 10vh;
+	height: 9vh;
 	position: absolute;
 	top: 0;
 	color: white;
-	background-color: #10361d;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -37,10 +36,9 @@ nav {
 
 .nav-container {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 900px;
 	height: 10vh;
 	display: flex;
-	padding: 20px;
 	align-items: center;
 	justify-content: flex-end;
 }
@@ -65,7 +63,9 @@ h2 {
 
 .brand {
 	margin-right: auto;
-	font-size: 2rem;
+	padding: 22px 16px 10px;
+	height: 100%;
+	font-size: 2.5rem;
 	font-family: 'Lora', serif;
 	font-weight: bold;
 }
@@ -73,10 +73,11 @@ h2 {
 .nav-item {
 	text-decoration: none;
 	list-style-type: none;
+	background-color: #10361d;
+	border-radius: 50px;
 	display: flex;
 	align-items: center;
 	padding: 20px;
-	height: 10vh;
 }
 
 a {
@@ -134,6 +135,11 @@ a {
 	color: white;
 }
 
+.fa-user {
+	margin-right: 10px;
+	font-size: 1.5rem;
+}
+
 #welcome {
 	font-size: 1.6rem;
 	font-weight: lighter;
@@ -142,14 +148,16 @@ a {
 
 .container {
 	background-color: #f7fdfa;
-	padding: 40px;
+	padding: 25px;
 	width: 400px;
 	border-radius: 8px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 #household-body {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	margin: 22vh 0;
 	background: url('https://images.unsplash.com/photo-1473081556163-2a17de81fc97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=2734&q=80');
 	background-size: cover;
 }
@@ -171,6 +179,23 @@ a {
 
 #create-household-btn {
 	width: 260px;
+	margin-top: 5px;
+}
+
+.container-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.add {
+	font-size: 1.5rem;
+	color: #00792a;
+}
+
+.add.expanded {
+	transform: rotate(45deg);
 }
 
 form {
@@ -203,6 +228,19 @@ form label {
 	border-radius: 4px;
 	font-family: inherit;
 	font-weight: bold;
+	font-size: 0.9rem;
+	width: 100%;
+}
+
+.form-control select {
+	display: block;
+	padding: 10px;
+	margin: 8px 0px;
+	border: 2px solid #cecdcd;
+	border-radius: 4px;
+	font-family: inherit;
+	font-weight: bold;
+	font-size: 0.9rem;
 	width: 100%;
 }
 
@@ -266,11 +304,11 @@ form label {
 
 #household-dashboard {
 	margin: 0px auto 30px auto;
-	padding: 50px 10px;
+	padding: 30px 10px;
 	width: 100%;
 	max-width: 900px;
-	background-color: #10361d8e;
-	border-radius: 20px;
+	background-color: #cbf6dbb2;
+	border-radius: 8px;
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: auto;
@@ -280,15 +318,14 @@ form label {
 	justify-items: center;
 }
 
+#dashboard-container {
+	margin: auto;
+	align-self: start;
+}
+
 #dashboard-header {
 	font-family: 'Lora', serif;
 	font-size: 2rem;
-	padding: 28px 34px 14px;
-	margin: 110px auto 0 120px;
-	width: 500px;
-	border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
-	background-color: #10361d;
 }
 
 #chores-container {
@@ -316,6 +353,7 @@ button {
 	color: #fff;
 	border: none;
 	border-radius: 4px;
+
 	box-shadow: 0px 3px 6px #00ff8081;
 }
 
@@ -352,6 +390,34 @@ input[type='checkbox'] {
 	margin: 0 15px 0 0;
 	height: 15px;
 	width: 15px;
+}
+
+.chore-container {
+	height: 70px;
+	background-color: white;
+	padding: 12px;
+	margin-bottom: 12px;
+	box-shadow: 0px 3px 6px #002a1560;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	color: inherit;
+}
+
+.chore-title {
+	font-weight: bold;
+}
+
+.chore-create-container {
+	width: 400px;
+	margin: 20px -20px;
+	padding: 20px 40px;
+	background-color: #d6f3e5;
+	display: none;
+}
+
+.chore-create-container.expanded {
+	display: block;
 }
 
 @media only screen and (max-width: 900px) {
