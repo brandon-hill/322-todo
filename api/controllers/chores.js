@@ -52,7 +52,7 @@ exports.chores_create_chore = (req, res, next) => {
 			console.log(result)
 
 			// Push chore to chore list and save, then redirect
-			Household.findOne({ _id: req.user.household; })
+			Household.findOne({ _id: req.user.household })
 				.exec()
 				.then((household) => {
 					household.chores.push(result)

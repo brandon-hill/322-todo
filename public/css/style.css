@@ -14,6 +14,7 @@ body {
 	background: url('https://images.unsplash.com/photo-1551970634-747846a548cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
 	background-size: cover;
 	background-attachment: fixed;
+	background-position: center;
 	font-family: 'Muli', sans-serif;
 	height: 100vh;
 	display: flex;
@@ -43,8 +44,26 @@ nav {
 	justify-content: flex-end;
 }
 
+.nav-item {
+	position: absolute;
+	top: 0;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #10361d;
+	border-radius: 10px;
+}
+
+.fa-angle-down {
+	font-size: 1.5rem;
+	margin-left: 14px;
+}
+
 #logout-btn {
-	margin: 0;
+	display: block;
+	margin: auto;
+	width: 90%;
 }
 
 h1 {
@@ -65,19 +84,17 @@ h2 {
 	margin-right: auto;
 	padding: 22px 16px 10px;
 	height: 100%;
-	font-size: 2.5rem;
+	font-size: 2rem;
 	font-family: 'Lora', serif;
 	font-weight: bold;
 }
 
-.nav-item {
-	text-decoration: none;
-	list-style-type: none;
-	background-color: #10361d;
-	border-radius: 50px;
+.user-nav {
 	display: flex;
 	align-items: center;
-	padding: 20px;
+	align-self: flex-end;
+	justify-content: center;
+	padding: 20px 24px 10px;
 }
 
 a {
@@ -89,6 +106,7 @@ a {
 	height: 100%;
 	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -130,13 +148,13 @@ a {
 
 #brand {
 	font-family: 'Lora', serif;
-	font-size: 5rem;
-	margin: 20px;
+	font-size: 3rem;
+	margin: 30px;
 	color: white;
 }
 
 .fa-user {
-	margin-right: 10px;
+	margin-right: 14px;
 	font-size: 1.5rem;
 }
 
@@ -148,18 +166,20 @@ a {
 
 .container {
 	background-color: #f7fdfa;
-	padding: 25px;
-	width: 400px;
+	padding: 30px 25px;
+	width: 100%;
+	max-width: 400px;
 	border-radius: 8px;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 #household-body {
-	display: flex;
-	flex-direction: column;
-	margin: 22vh 0;
 	background: url('https://images.unsplash.com/photo-1473081556163-2a17de81fc97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=2734&q=80');
 	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	background-attachment: fixed;
+	background-color: #104623;
 }
 
 #household-setup-container {
@@ -250,7 +270,7 @@ form label {
 	justify-content: center;
 }
 
-#household-code {
+#access-code {
 	height: 42px;
 	padding: 12px;
 	border-top-right-radius: 0;
@@ -303,24 +323,23 @@ form label {
 }
 
 #household-dashboard {
-	margin: 0px auto 30px auto;
-	padding: 30px 10px;
+	padding: 15px;
 	width: 100%;
 	max-width: 900px;
 	background-color: #cbf6dbb2;
 	border-radius: 8px;
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 100%;
 	grid-template-rows: auto;
 	grid-template-areas:
-		'chores reminders'
-		'chores shopping';
+		'reminders'
+		'chores'
+		'shopping';
 	justify-items: center;
 }
 
 #dashboard-container {
-	margin: auto;
-	align-self: start;
+	margin: 80px 10px;
 }
 
 #dashboard-header {
@@ -346,7 +365,7 @@ form label {
 button {
 	width: 100%;
 	padding: 12px;
-	margin: 14px 0 8px;
+	margin: 14px 0px 12px;
 	font-size: 1.1rem;
 	font-family: inherit;
 	background: #02a747;
@@ -409,8 +428,7 @@ input[type='checkbox'] {
 }
 
 .chore-create-container {
-	width: 400px;
-	margin: 20px -20px;
+	margin: 20px -25px;
 	padding: 20px 40px;
 	background-color: #d6f3e5;
 	display: none;
@@ -420,16 +438,8 @@ input[type='checkbox'] {
 	display: block;
 }
 
-@media only screen and (max-width: 900px) {
-	.overlay {
-		flex-direction: column;
-	}
+@media only screen and (max-width: 800px) {
+}
 
-	#brand {
-		font-size: 4rem;
-	}
-
-	body {
-		overflow: auto;
-	}
+@media only screen and (min-width: 800px) {
 }
