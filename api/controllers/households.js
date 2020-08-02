@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const Household = require('../models/household')
 const User = require('../models/user')
-const user = require('../models/user')
 
 exports.households_get_create = (req, res, next) => {
 	res.render('create', { user: req.user })
@@ -53,22 +52,63 @@ exports.households_post_create = (req, res, next) => {
 		.catch((err) => {
 			console.log(err)
 			req.flash('error_msg', 'Error, try again')
-			res.status(500).json({
-				err: err,
-			})
+			res.redirect('/')
 		})
 }
 
 exports.households_join = (req, res, next) => {
-	Household.findOne({ accessCode: req.accessCode })
-		.execute()
+	// Match access code to existing household
+	Household.findOne({ accessCode: req.body.accessCode })
+		.exec()
 		.then((household) => {
+			// Add user to household members list
 			household.members.push(req.user)
-			req.flash('success_msg', 'Successfully joined household')
-			res.render('/', {
-				household: household,
-				user: req.user,
-			})
+
+			household
+				.save()
+				.then(
+					// Add household
+					User.findById(req.user._id)
+						.exec()
+						.then((user) => {
+							console.log(user)
+
+							if (user.household != '') {
+								req.flash(
+									'error_msg',
+									'You already belong to a different household'
+								)
+								res.redirect('/')
+							}
+
+							// Update user's household id
+							user.household = household._id
+							user
+								.save()
+								.then(() => {
+									req.flash('success_msg', `You joined ${household.name}`)
+									res.render('index', { household: household, user: user })
+								})
+								.catch((err) => {
+									console.log(err)
+									req.flash('error_msg', 'Failed to update household')
+									res.redirect('/')
+								})
+						})
+						.catch((err) => {
+							console.log(err)
+							req.flash('error_msg', 'Error, try again')
+							res.redirect('/')
+						})
+				)
+				.catch((err) => {
+					console.log(err)
+					req.flash('error_msg', "You're unable to join this household")
+				})
 		})
-		.catch()
+		.catch((err) => {
+			console.log(err)
+			req.flash('error_msg', 'Invalid access code')
+			res.redirect('/')
+		})
 }

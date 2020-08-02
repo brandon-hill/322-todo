@@ -29,7 +29,7 @@ nav {
 	height: 9vh;
 	position: absolute;
 	top: 0;
-	color: white;
+	color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -55,19 +55,24 @@ nav {
 	border-radius: 10px;
 }
 
-.fa-angle-down {
+.fa-angle-right {
 	font-size: 1.5rem;
 	margin-left: 14px;
 }
 
 #logout-btn {
-	display: block;
+	display: none;
 	margin: auto;
 	width: 90%;
 }
 
 h1 {
-	color: white;
+	color: #fff;
+}
+
+#dashboard-header h1 {
+	font-size: 2rem;
+	margin: 0 0 5px;
 }
 
 h2 {
@@ -94,7 +99,7 @@ h2 {
 	align-items: center;
 	align-self: flex-end;
 	justify-content: center;
-	padding: 20px 24px 10px;
+	padding: 20px 24px;
 }
 
 a {
@@ -132,7 +137,7 @@ a {
 }
 
 .visible {
-	transform: translateY(180%);
+	transform: translateY(100%);
 	transition: transform 1s;
 }
 
@@ -140,6 +145,7 @@ a {
 	cursor: pointer;
 	color: rgba(0, 0, 0, 0.5);
 	font-size: 1.6rem;
+	padding-bottom: 5px;
 }
 
 .dismissed {
@@ -150,7 +156,7 @@ a {
 	font-family: 'Lora', serif;
 	font-size: 3rem;
 	margin: 30px;
-	color: white;
+	color: #fff;
 }
 
 .fa-user {
@@ -188,7 +194,7 @@ a {
 }
 
 #household-setup-container > .form-control {
-	background: white;
+	background: #fff;
 	padding: 20px;
 	display: flex;
 	align-items: center;
@@ -212,6 +218,11 @@ a {
 .add {
 	font-size: 1.5rem;
 	color: #00792a;
+}
+
+p .add {
+	font-size: 1rem;
+	padding: 0 5px;
 }
 
 .add.expanded {
@@ -245,6 +256,7 @@ form label {
 	padding: 10px;
 	margin: 8px 0px;
 	border: 2px solid #cecdcd;
+	background-color: #fff;
 	border-radius: 4px;
 	font-family: inherit;
 	font-weight: bold;
@@ -307,6 +319,20 @@ form label {
 	font-weight: bold;
 }
 
+.fa-home {
+	margin: 10px 12px 18px;
+	font-size: 2.2rem;
+}
+
+.fa-cog {
+	font-size: 1.8rem;
+	position: absolute;
+	right: 0;
+	top: 12px;
+	color: #fff;
+	margin: 12px;
+}
+
 #household-join-form {
 	background: #d6f3e5;
 	display: flex;
@@ -340,6 +366,8 @@ form label {
 
 #dashboard-container {
 	margin: 80px 10px;
+	position: absolute;
+	top: 10vh;
 }
 
 #dashboard-header {
@@ -378,7 +406,7 @@ button {
 
 button a {
 	text-decoration: none;
-	color: white;
+	color: #fff;
 }
 
 button:hover {
@@ -387,7 +415,7 @@ button:hover {
 }
 
 .checkbox-container {
-	background: white;
+	background: #fff;
 	display: flex;
 	padding: 17px;
 	margin: 12px;
@@ -413,7 +441,7 @@ input[type='checkbox'] {
 
 .chore-container {
 	height: 70px;
-	background-color: white;
+	background-color: #fff;
 	padding: 12px;
 	margin-bottom: 12px;
 	box-shadow: 0px 3px 6px #002a1560;
@@ -423,23 +451,41 @@ input[type='checkbox'] {
 	color: inherit;
 }
 
-.chore-title {
+.no-items-container {
+	margin-top: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.item-title {
 	font-weight: bold;
 }
 
-.chore-create-container {
+.item-create-container {
 	margin: 20px -25px;
 	padding: 20px 40px;
 	background-color: #d6f3e5;
 	display: none;
 }
 
-.chore-create-container.expanded {
+.item-create-container.expanded {
 	display: block;
 }
 
 @media only screen and (max-width: 800px) {
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 900px) {
+	#household-dashboard {
+		grid-template-columns: 50% 50%;
+		grid-template-rows: auto;
+		grid-template-areas:
+			'chores reminders'
+			'chores shopping';
+	}
+
+	#household-dashboard .container {
+		margin: 20px;
+	}
 }

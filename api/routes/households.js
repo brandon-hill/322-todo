@@ -16,6 +16,6 @@ router.post(
 	householdsController.households_post_create
 )
 
-router.put('/join', ensureAuthenticated, householdsController.households_join)
+router.post('/join', ensureAuthenticated, householdsController.households_join)
 
 module.exports = router

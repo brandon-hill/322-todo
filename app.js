@@ -91,7 +91,7 @@ app.use((req, res, next) => {
 
 // Handle other errors
 app.use((error, req, res, next) => {
-	res.status(error.status || 500)
+	res.status(500)
 	res.json({
 		error: {
 			message: error.message,
