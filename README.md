@@ -1,5 +1,5 @@
 # Householder
 
-Makes tracking your household tasks simple and collaborative.
+Makes collaborating on household tasks simple.
 
 Household members can assign chores, set reminders, and make a shopping list.

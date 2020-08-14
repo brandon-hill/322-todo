@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const Household = require('../models/household')
 const User = require('../models/user')
+const household = require('../models/household')
 
 exports.households_get_create = (req, res, next) => {
 	res.render('create', { user: req.user })
@@ -61,49 +62,50 @@ exports.households_join = (req, res, next) => {
 	Household.findOne({ accessCode: req.body.accessCode })
 		.exec()
 		.then((household) => {
-			// Add user to household members list
-			household.members.push(req.user)
+			// Add household to user document
+			User.findById(req.user._id)
+				.exec()
+				.then((user) => {
+					console.log(user)
 
-			household
-				.save()
-				.then(
-					// Add household
-					User.findById(req.user._id)
-						.exec()
+					if (user.household != '') {
+						req.flash(
+							'error_msg',
+							'You already belong to a different household'
+						)
+						return res.redirect('/')
+					}
+
+					// Update user's household id
+					user.household = household._id
+					user
+						.save()
 						.then((user) => {
-							console.log(user)
+							// Add user to household members list
+							household.members.push(user)
 
-							if (user.household != '') {
-								req.flash(
-									'error_msg',
-									'You already belong to a different household'
-								)
-								res.redirect('/')
-							}
-
-							// Update user's household id
-							user.household = household._id
-							user
+							household
 								.save()
-								.then(() => {
+								.then((household) => {
 									req.flash('success_msg', `You joined ${household.name}`)
 									res.render('index', { household: household, user: user })
 								})
 								.catch((err) => {
 									console.log(err)
-									req.flash('error_msg', 'Failed to update household')
+									req.flash('error_msg', 'Unable to join household')
 									res.redirect('/')
 								})
 						})
 						.catch((err) => {
 							console.log(err)
-							req.flash('error_msg', 'Error, try again')
+							req.flash('error_msg', 'Unable to join household')
 							res.redirect('/')
 						})
-				)
+				})
 				.catch((err) => {
 					console.log(err)
-					req.flash('error_msg', "You're unable to join this household")
+					req.flash('error_msg', 'Unable to join household')
+					res.redirect('/')
 				})
 		})
 		.catch((err) => {
@@ -112,3 +114,41 @@ exports.households_join = (req, res, next) => {
 			res.redirect('/')
 		})
 }
+
+// exports.households_join = (req, res, next) => {
+// 	// Match access code to existing household
+//
+// 		.then((household) => {
+// 			// Add user to household members list
+//
+
+// 			household
+// 				.save()
+// 				.then(
+//
+// 									req.flash('success_msg', `You joined ${household.name}`)
+// 									res.render('index', { household: household, user: user })
+// 								})
+// 								.catch((err) => {
+// 									console.log(err)
+// 									req.flash('error_msg', 'Failed to update household')
+// 									res.redirect('/')
+// 								})
+// 						})
+// 						.catch((err) => {
+// 							console.log(err)
+// 							req.flash('error_msg', 'Error, try again')
+// 							res.redirect('/')
+// 						})
+// 				)
+// 				.catch((err) => {
+// 					console.log(err)
+// 					req.flash('error_msg', "You're unable to join this household")
+// 				})
+// 		})
+// 		.catch((err) => {
+// 			console.log(err)
+// 			req.flash('error_msg', 'Invalid access code')
+// 			res.redirect('/')
+// 		})
+// }

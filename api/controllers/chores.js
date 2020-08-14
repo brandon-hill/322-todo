@@ -5,7 +5,7 @@ const User = require('../models/user')
 const Household = require('../models/household')
 
 // Instantiate current date
-const today = new Date()
+let today = new Date()
 
 exports.chores_get_all = (req, res, next) => {
 	// Retrieve household info if user has one

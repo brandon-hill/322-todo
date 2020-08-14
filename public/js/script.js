@@ -8,9 +8,9 @@ const flashMessage = document.querySelector('.flash')
 const dismiss = document.querySelector('.dismiss')
 const dashboardContainer = document.querySelector('#dashboard-container')
 const containerHeaders = document.querySelectorAll('.container-header')
-// const addBtn = document.querySelectorAll('.add')
-// const createForm = document.querySelectorAll('.create-form')
-// const choreCreateForm = document.querySelector('#chore-create-form')
+const userNav = document.querySelector('#user-nav')
+const caret = document.querySelector('.fa-caret-down')
+const userNavMenu = document.querySelector('#nav-menu-container')
 
 // Show input error message and outline
 function showError(input, message) {
@@ -120,4 +120,10 @@ Array.from(containerHeaders).forEach((header) => {
 			e.currentTarget.nextSibling.nextSibling.classList.toggle('expanded')
 		}
 	})
+})
+
+// Toggle user nav
+userNav.addEventListener('click', (e) => {
+	userNavMenu.classList.toggle('hidden')
+	caret.classList.toggle('expanded')
 })

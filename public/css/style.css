@@ -10,16 +10,18 @@
 	box-sizing: border-box;
 }
 
+html {
+	height: 100vh;
+}
+
 body {
-	background: url('https://images.unsplash.com/photo-1551970634-747846a548cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+	height: 100%;
+	background: url('https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80');
 	background-size: cover;
 	background-attachment: fixed;
 	background-position: center;
+	background-color: #104623;
 	font-family: 'Muli', sans-serif;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	margin: 0;
 	color: #104623;
 }
@@ -55,24 +57,31 @@ nav {
 	border-radius: 10px;
 }
 
-.fa-angle-right {
-	font-size: 1.5rem;
+.fa-caret-down {
+	font-size: 1.2rem;
 	margin-left: 14px;
 }
 
+.fa-caret-down.expanded {
+	transform: rotate(-180deg);
+	transition: transform 0.3s;
+}
+
 #logout-btn {
-	display: none;
+	display: block;
 	margin: auto;
 	width: 90%;
 }
 
 h1 {
-	color: #fff;
+	color: #f7fdfa;
 }
 
 #dashboard-header h1 {
+	display: inline-block;
+	font-family: 'Muli', sans-serif;
 	font-size: 2rem;
-	margin: 0 0 5px;
+	margin: 0;
 }
 
 h2 {
@@ -92,14 +101,24 @@ h2 {
 	font-size: 2rem;
 	font-family: 'Lora', serif;
 	font-weight: bold;
+	color: #f7fdfa;
 }
 
-.user-nav {
+#user-nav {
 	display: flex;
 	align-items: center;
 	align-self: flex-end;
 	justify-content: center;
-	padding: 20px 24px;
+	padding: 16px 14px;
+	color: #f7fdfa;
+}
+
+#nav-menu-container {
+	transition: 0.3s;
+}
+
+.hidden {
+	display: none;
 }
 
 a {
@@ -108,9 +127,14 @@ a {
 }
 
 .overlay {
-	height: 100%;
+	background: rgba(56, 102, 64, 0.58);
 	width: 100%;
+	height: 100%;
+	overflow: auto;
 	display: flex;
+	position: absolute;
+	top: 0;
+	bottom: 0;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -156,12 +180,15 @@ a {
 	font-family: 'Lora', serif;
 	font-size: 3rem;
 	margin: 30px;
-	color: #fff;
+	color: #104623;
 }
 
 .fa-user {
 	margin-right: 14px;
 	font-size: 1.5rem;
+	padding: 8px;
+	border-radius: 8px;
+	background-color: #476c5a;
 }
 
 #welcome {
@@ -179,18 +206,14 @@ a {
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-#household-body {
-	background: url('https://images.unsplash.com/photo-1473081556163-2a17de81fc97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=2734&q=80');
-	background-size: cover;
-	display: flex;
-	flex-direction: column;
-	background-attachment: fixed;
-	background-color: #104623;
+.overlay > .container {
+	padding: 40px;
 }
 
 #household-setup-container {
 	padding: 0;
-	width: 400px;
+	width: 100%;
+	max-width: 400px;
 }
 
 #household-setup-container > .form-control {
@@ -212,7 +235,8 @@ a {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 10px;
+	padding: 30px 25px 10px;
+	margin: -30px -25px 15px;
 }
 
 .add {
@@ -225,7 +249,7 @@ p .add {
 	padding: 0 5px;
 }
 
-.add.expanded {
+.add .expanded {
 	transform: rotate(45deg);
 }
 
@@ -326,11 +350,8 @@ form label {
 
 .fa-cog {
 	font-size: 1.8rem;
-	position: absolute;
-	right: 0;
-	top: 12px;
-	color: #fff;
 	margin: 12px;
+	margin-left: auto;
 }
 
 #household-join-form {
@@ -340,8 +361,8 @@ form label {
 	justify-content: center;
 	width: 100%;
 	padding: 30px;
-	border-bottom-left-radius: 8%;
-	border-bottom-right-radius: 8%;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 #household-join-form .form-control {
@@ -349,11 +370,8 @@ form label {
 }
 
 #household-dashboard {
-	padding: 15px;
 	width: 100%;
 	max-width: 900px;
-	background-color: #cbf6dbb2;
-	border-radius: 8px;
 	display: grid;
 	grid-template-columns: 100%;
 	grid-template-rows: auto;
@@ -364,20 +382,34 @@ form label {
 	justify-items: center;
 }
 
+#household-dashboard .container {
+	max-width: 420px;
+}
+
 #dashboard-container {
-	margin: 80px 10px;
-	position: absolute;
-	top: 10vh;
+	margin: 300px 10px 100px;
+	width: 100%;
+	max-width: 900px;
 }
 
 #dashboard-header {
 	font-family: 'Lora', serif;
 	font-size: 2rem;
+	padding: 0 10px;
+	width: 100%;
+	min-width: 370px;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	color: #f7fdfa;
 }
 
 #chores-container {
 	grid-area: chores;
 	margin: 15px;
+	max-height: 600px;
+	overflow: auto;
 }
 
 #reminders-container {
@@ -456,6 +488,8 @@ input[type='checkbox'] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: #d6f3e5;
+	border-radius: 6px;
 }
 
 .item-title {
@@ -473,7 +507,10 @@ input[type='checkbox'] {
 	display: block;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
+	#dashboard-header {
+		max-width: 460px;
+	}
 }
 
 @media only screen and (min-width: 900px) {
@@ -485,7 +522,11 @@ input[type='checkbox'] {
 			'chores shopping';
 	}
 
+	#dashboard-header {
+		width: 100%;
+	}
+
 	#household-dashboard .container {
-		margin: 20px;
+		margin: 15px;
 	}
 }
