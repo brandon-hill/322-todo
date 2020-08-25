@@ -2,13 +2,17 @@ const mongoose = require('mongoose')
 
 const Household = require('../models/household')
 const User = require('../models/user')
-const household = require('../models/household')
 
 exports.households_get_create = (req, res, next) => {
 	res.render('create', { user: req.user })
 }
 
 exports.households_post_create = (req, res, next) => {
+	if (req.user.household != '') {
+		req.flash('error_msg', 'You already belong to a different household')
+		res.redirect('/')
+	}
+
 	const household = new Household({
 		_id: new mongoose.Types.ObjectId(),
 		name: req.body.name,
@@ -23,25 +27,18 @@ exports.households_post_create = (req, res, next) => {
 				.then((user) => {
 					console.log(user)
 
-					if (user.household != '') {
-						req.flash(
-							'error_msg',
-							'You already belong to a different household'
-						)
-						res.redirect('/')
-					}
-
 					// Update user's household id
 					user.household = result._id
 					user
 						.save()
 						.then(() => {
 							req.flash('success_msg', 'Household created')
-							res.render('index', { household: household, user: user })
+							res.redirect('/')
 						})
 						.catch((err) => {
 							console.log(err)
 							req.flash('error_msg', 'Failed to update household')
+							res.redirect('/')
 						})
 				})
 				.catch((err) => {
