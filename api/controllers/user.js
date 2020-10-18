@@ -36,7 +36,7 @@ exports.user_post_register = (req, res, next) => {
 							.then((result) => {
 								console.log(result)
 								req.flash('success_msg', 'Registration successful')
-								res.redirect('/user/login')
+								res.redirect('/')
 							})
 							.catch((err) => {
 								console.log(err)
