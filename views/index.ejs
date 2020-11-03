@@ -178,7 +178,8 @@
 					</div>
 				</div>
 			<% } else { %>
-			<h1>Set up your household</h1>
+			<h1 id="landing-header">Welcome to Householder</h1>
+			<p>Set up a household to get started</p>
 			<div class="container" id="household-setup-container">
 				<div class="form-control">
 					<form
@@ -194,8 +195,8 @@
 					</form>
 				</div>
 				<form id="household-join-form" action="/household/join" method="POST">
-					<label for="household-code">Or join an existing household</label>
-					<div class="form-control" id="join-form-control" name="household-code">
+					<label id="access-code-label" for="household-code">Want to join a household? Enter the access code below</label>
+					<div class="form-control" id="join-form-control" name="household-code">						
 						<input
 							type="text"
 							id="access-code"
