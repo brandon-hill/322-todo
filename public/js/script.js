@@ -4,7 +4,6 @@ const email = document.getElementById('email')
 const password = document.getElementById('password')
 const confirmation = document.getElementById('confirmation')
 const registerSubmit = document.querySelector('#register-form .submit-btn')
-const householdCreateForm = document.getElementById("household-create-form")
 const flashMessage = document.querySelector('.flash')
 const dismiss = document.querySelector('.dismiss')
 const dashboardContainer = document.querySelector('#dashboard-container')
@@ -96,7 +95,7 @@ if (flashMessage != null) {
 	})
 }
 
-// Register form submit
+// Register submit event
 if (registerForm) {
 	registerForm.addEventListener('submit', (e) => {
 		// Validate fields
@@ -113,21 +112,8 @@ if (registerForm) {
 	})
 }
 
-// Household create form submit
-if (householdCreateForm) {
-	householdForm.addEventListener('submit', (e) => {
-		// Validate fields
-		if (
-			!checkRequired([]) ||
-			!checkLength(username, 1, 25) ||
-			!checkEmail(email) ||
-			!checkLength(password, 6, 25) ||
-			!checkLength(confirmation, 6, 25) ||
-			!checkPasswordsMatch(password, confirmation)
-		) {
-			e.preventDefault()
-		}
-	})
+// Create Household Submit Event
+if (householdForm) {
 }
 
 // Toggle create form
