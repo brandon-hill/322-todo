@@ -188,10 +188,22 @@ a {
 	display: none;
 }
 
+.brand-container {
+	margin: 30px;
+	padding: 10px;
+}
+
 #brand {
 	font-family: 'Lora', serif;
 	font-size: 3rem;
-	margin: 30px;
+	margin: 10px;
+}
+
+.tagline {
+	text-align: center;
+	color: rgba(255, 255, 255, 0.685);
+	font-size: 1.2rem;
+	margin: 0;
 }
 
 .menu-item {

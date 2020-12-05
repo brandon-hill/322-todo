@@ -11,6 +11,8 @@ const containerHeaders = document.querySelectorAll('.container-header')
 const userNav = document.querySelector('#user-nav')
 const caret = document.querySelector('.fa-caret-down')
 const userNavMenu = document.querySelector('#nav-menu-container')
+const householdJoinForm = document.querySelector('#household-join-form')
+const accessCode = document.querySelector('#accessCode')
 
 // Show input error message and outline
 function showError(input, message) {
@@ -113,7 +115,18 @@ if (registerForm) {
 }
 
 // Create Household Submit Event
-if (householdForm) {
+if (householdJoinForm) {
+	householdJoinForm.addEventListener('submit', (e) => {
+		// Validate fields
+		if (
+			!checkRequired([accessCode]) ||
+			!checkLength(accessCode, 6, 6) ||
+			!checkLength(confirmation, 6, 25) ||
+			!checkPasswordsMatch(password, confirmation)
+		) {
+			e.preventDefault()
+		}
+	})
 }
 
 // Toggle create form
