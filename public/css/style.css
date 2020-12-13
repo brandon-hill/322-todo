@@ -356,6 +356,7 @@ form label {
 }
 
 #access-code-label {
+	max-width: 260px;
 }
 
 #access-code {
@@ -598,11 +599,20 @@ input[type='checkbox'] {
 
 @media only screen and (max-width: 900px) {
 	.brand {
-		font-size: 1.6rem;
+		font-size: 1.4rem;
+		padding: 16px 12px 12px 12px;
 	}
 
 	#user-nav {
 		padding: 8px;
+	}
+
+	#nav-username {
+		font-size: 0.8rem;
+	}
+
+	.nav-item {
+		margin: 4px;
 	}
 
 	#dashboard-container {
