@@ -356,15 +356,9 @@ form label {
 	justify-content: center;
 }
 
-<<<<<<< HEAD
 /* #access-code-label {
 	
 } */
-=======
-#access-code-label {
-	max-width: 260px;
-}
->>>>>>> d27f2378a8d4264a605cce170032fd4876545cc9
 
 #access-code {
 	height: 42px;
