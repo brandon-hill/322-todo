@@ -118,7 +118,10 @@ h2 {
 	align-items: center;
 	align-self: flex-end;
 	justify-content: center;
+<<<<<<< HEAD
 	padding: 14px 12px;
+=======
+>>>>>>> d27f2378a8d4264a605cce170032fd4876545cc9
 	padding: 8px;
 	color: #f7fdfa;
 }
@@ -189,10 +192,22 @@ a {
 	display: none;
 }
 
+.brand-container {
+	margin: 30px;
+	padding: 10px;
+}
+
 #brand {
 	font-family: 'Lora', serif;
 	font-size: 3rem;
-	margin: 30px;
+	margin: 10px;
+}
+
+.tagline {
+	text-align: center;
+	color: rgba(255, 255, 255, 0.685);
+	font-size: 1.2rem;
+	margin: 0;
 }
 
 .menu-item {
@@ -344,9 +359,15 @@ form label {
 	justify-content: center;
 }
 
+<<<<<<< HEAD
 /* #access-code-label {
 	
 } */
+=======
+#access-code-label {
+	max-width: 260px;
+}
+>>>>>>> d27f2378a8d4264a605cce170032fd4876545cc9
 
 #access-code {
 	height: 42px;
@@ -588,11 +609,20 @@ input[type='checkbox'] {
 
 @media only screen and (max-width: 900px) {
 	.brand {
-		font-size: 1.6rem;
+		font-size: 1.4rem;
+		padding: 16px 12px 12px 12px;
 	}
 
 	#user-nav {
 		padding: 8px;
+	}
+
+	#nav-username {
+		font-size: 0.8rem;
+	}
+
+	.nav-item {
+		margin: 4px;
 	}
 
 	#dashboard-container {
